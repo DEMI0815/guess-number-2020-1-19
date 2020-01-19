@@ -12,9 +12,23 @@ public class GuessNumber {
     }
 
     String getOutput(String input) {
+        if (input.chars().distinct().count() != 4)
+            return "Wrong Input, input again";
         if (input.equals(answer))
             return "4A0B";
-        return "";
+        int numA = 0;
+        int numB = 0;
+        for (int i = 0; i < 4; i++) {
+            char answerChar = answer.charAt(i);
+            char inputChar = input.charAt(i);
+            if (answerChar == inputChar)
+                numA++;
+            if(answer.indexOf(inputChar) != -1)
+                numB++;
+        }
+        numB -= numA;
+
+        return numA+"A"+numB+"B";
     }
 
 }

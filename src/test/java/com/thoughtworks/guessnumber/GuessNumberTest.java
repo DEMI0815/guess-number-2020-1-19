@@ -18,4 +18,15 @@ public class GuessNumberTest {
         assertEquals(output, "4A0B");
     }
 
+    @Test
+    public void should_return_1A0B() {
+        Answer answer = mock(Answer.class);
+        when(answer.getAnswer()).thenReturn("1234");
+        GuessNumber guessNumber = new GuessNumber(answer);
+
+        String output = guessNumber.getOutput("1567");
+
+        assertEquals(output, "1A0B");
+    }
+
 }
