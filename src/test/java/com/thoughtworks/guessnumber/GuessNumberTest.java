@@ -62,4 +62,15 @@ public class GuessNumberTest {
         assertEquals(output, "Wrong Input, input again");
     }
 
+    @Test
+    public void wrong_input_when_less_than_4_numbers() {
+        Answer answer = mock(Answer.class);
+        when(answer.getAnswer()).thenReturn("1234");
+        GuessNumber guessNumber = new GuessNumber(answer);
+
+        String output = guessNumber.getOutput("12");
+
+        assertEquals(output, "Wrong Input, input again");
+    }
+
 }
