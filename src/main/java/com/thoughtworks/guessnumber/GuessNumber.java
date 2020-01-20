@@ -4,8 +4,20 @@ import java.util.*;
 
 public class GuessNumber {
     private final String answer;
-    private int numOfInput = 0;
+    private static int numOfInput = 0;
     List<Result> resultList = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Answer answer = new Answer();
+        GuessNumber guessNumber = new GuessNumber(answer);
+        while (numOfInput < 6) {
+            Scanner sc = new Scanner(System.in);
+            String input = sc.next();
+            List<Result> guess = guessNumber.guess(input);
+            guess.forEach(System.out::println);
+        }
+        System.out.println("game over");
+    }
 
     public GuessNumber(Answer answer) {
         this.answer = answer.getAnswer();
@@ -17,12 +29,16 @@ public class GuessNumber {
             numOfInput++;
             Result currentResult = new Result(input, output);
             resultList.add(currentResult);
+            if (output.equals("4A0B")) {
+                numOfInput = 6;
+                return resultList;
+            }
         }
         return resultList;
     }
 
     String getOutput(String input) {
-        if (input.chars().distinct().count() != 4)
+        if (input.length() > 4 || input.chars().distinct().count() != 4)
             return "Wrong Input, input again";
         if (input.equals(answer))
             return "4A0B";
@@ -47,7 +63,7 @@ class Answer {
     public String getAnswer() {
         Random random = new Random();
         Set<String> numbers = new HashSet<>();
-        for (int i = 0; i < 4; i++) {
+        while (numbers.size() < 4) {
             numbers.add(String.valueOf(random.nextInt(10)));
         }
         return String.join("", numbers);
