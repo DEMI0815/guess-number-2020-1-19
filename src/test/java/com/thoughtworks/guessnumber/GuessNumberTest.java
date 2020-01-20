@@ -1,6 +1,9 @@
 package com.thoughtworks.guessnumber;
 
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -71,6 +74,22 @@ public class GuessNumberTest {
         String output = guessNumber.getOutput("12");
 
         assertEquals(output, "Wrong Input, input again");
+    }
+
+    @Test
+    public void guess_number() {
+        Answer answer = mock(Answer.class);
+        when(answer.getAnswer()).thenReturn("1234");
+        GuessNumber guessNumber = new GuessNumber(answer);
+
+        List<Result> resultList = guessNumber.guess("1278");
+        guessNumber.guess("1256");
+        guessNumber.guess("4567");
+        guessNumber.guess("4567");
+        guessNumber.guess("4567");
+        guessNumber.guess("4567");
+        resultList.forEach(System.out::println);
+
     }
 
 }

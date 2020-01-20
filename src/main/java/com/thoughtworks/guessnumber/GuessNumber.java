@@ -1,14 +1,24 @@
 package com.thoughtworks.guessnumber;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class GuessNumber {
     private final String answer;
+    private int numOfInput = 0;
+    List<Result> resultList = new ArrayList<>();
 
     public GuessNumber(Answer answer) {
         this.answer = answer.getAnswer();
+    }
+
+    List<Result> guess(String input) {
+        if (numOfInput < 6) {
+            String output = getOutput(input);
+            numOfInput++;
+            Result currentResult = new Result(input, output);
+            resultList.add(currentResult);
+        }
+        return resultList;
     }
 
     String getOutput(String input) {
@@ -23,12 +33,12 @@ public class GuessNumber {
             char inputChar = input.charAt(i);
             if (answerChar == inputChar)
                 numA++;
-            if(answer.indexOf(inputChar) != -1)
+            if (answer.indexOf(inputChar) != -1)
                 numB++;
         }
         numB -= numA;
 
-        return numA+"A"+numB+"B";
+        return numA + "A" + numB + "B";
     }
 
 }
