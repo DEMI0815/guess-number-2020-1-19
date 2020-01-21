@@ -56,16 +56,4 @@ public class GuessNumber {
 
         return numA + "A" + numB + "B";
     }
-
-}
-
-class Answer {
-    public String getAnswer() {
-        Random random = new Random();
-        Set<String> numbers = new HashSet<>();
-        while (numbers.size() < 4) {
-            numbers.add(String.valueOf(random.nextInt(10)));
-        }
-        return String.join("", numbers);
-    }
 }
