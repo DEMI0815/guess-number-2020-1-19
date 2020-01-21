@@ -22,6 +22,17 @@ public class GuessNumberTest {
     }
 
     @Test
+    public void should_return_0A0B() {
+        Answer answer = mock(Answer.class);
+        when(answer.getAnswer()).thenReturn("1234");
+        GuessNumber guessNumber = new GuessNumber(answer);
+
+        String output = guessNumber.getOutput("5678");
+
+        assertEquals(output, "0A0B");
+    }
+
+    @Test
     public void should_return_1A0B() {
         Answer answer = mock(Answer.class);
         when(answer.getAnswer()).thenReturn("1234");
@@ -52,6 +63,17 @@ public class GuessNumberTest {
         String output = guessNumber.getOutput("0324");
 
         assertEquals(output, "1A2B");
+    }
+
+    @Test
+    public void should_return_2A2B() {
+        Answer answer = mock(Answer.class);
+        when(answer.getAnswer()).thenReturn("1234");
+        GuessNumber guessNumber = new GuessNumber(answer);
+
+        String output = guessNumber.getOutput("1243");
+
+        assertEquals(output, "2A2B");
     }
 
     @Test
